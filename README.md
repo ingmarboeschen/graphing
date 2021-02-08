@@ -16,7 +16,7 @@ prettybarplot(table(x,y)) # two dimensional
 x<-sample(letters[1:4],100,T)
 anibarplot(table(x))
 ``` 
-<img src="./preview/profileline2.png" height="400">
+<img src="./preview/profileline1.png" height="400"><img src="./preview/profileline2.png" height="400">
 
 ## CIV(), confidence interval violin plot
 ```r
