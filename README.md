@@ -1,7 +1,7 @@
-## graphing
+# graphing
 Some convenient graphic functions for R
 
-# prettybarplot()
+## prettybarplot()
 ```r
 prettybarplot(1:10)``` 
-![](preview/prettybarplot1d.png)
+![](./preview/prettybarplot1d.png)
