@@ -1,5 +1,5 @@
 # graphing
-Some convenient graphic functions for R
+This package contains some convenient graphic functions for the statistical software R.
 
 ## prettybarplot()
 ```r
@@ -13,10 +13,24 @@ prettybarplot(table(x,y)) # two dimensional
 
 ## profileline()
 ```r
-x<-sample(letters[1:4],100,T)
-anibarplot(table(x))
+matrix<-data.frame(matrix(sample(-3:3,1000,T),ncol=20))
+names(matrix)<-paste("Item",1:20); g<-paste("Group",rep(1:3,length=200))
+for(i in 1:dim(matrix)[2]){matrix[,i]<-factor(matrix[,i],-3:3,c("fully disagree","2","3","4","5","6","fully agree"))}
+profileline(matrix,g,main="",N_legend=T,pch="",type="Mean",ex=T,low="low",high="high",xlab="agreement")
 ``` 
 <img src="./preview/profileline1.png" height="400"><img src="./preview/profileline2.png" height="400">
+
+## itemplot()
+```r
+x<-factor(sample(letters[1:6],100,T))
+itemplot(x,main="itemplot()",labels=c("I fully\n disagree","I fully\n agree"))
+``` 
+<img src="./preview/itemplot.png" height="200">
+
+
+
+
+
 
 ## CIV(), confidence interval violin plot
 ```r
@@ -26,3 +40,21 @@ CIV(x,y,main="Confidence Intervall Violin Plot")
 
 ``` 
 <img src="./preview/Confidence Intervall Violin Plot.png" height="400">
+
+
+## bp3d(), barplot for 3 dimensional contingency tables
+```r
+x <- sample(paste("time",1:4),240,T)
+z <- rep(c("A","B"),each=120)
+y <- paste("answer",sample(1:7,240,T))
+bp3d(x,z,y,main="bp3d()",xlab="treatment group")
+
+``` 
+<img src="./preview/bp3d.png" height="400">
+
+
+
+
+
+
+
