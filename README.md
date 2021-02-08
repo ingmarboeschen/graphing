@@ -5,8 +5,10 @@ This package contains some convenient graphic functions for the statistical soft
 ```r
 x<-sample(letters[1:4],100,T)
 y<-sample(1:3,100,T)
-prettybarplot(table(x)) # one dimensional
-prettybarplot(table(x,y)) # two dimensional
+# one dimensional absolute frequencies
+prettybarplot(table(x)) 
+# two dimensional relative frequencies
+prettybarplot(prop.table(table(x,y))) 
 ``` 
 <img src="./preview/prettybarplot1d.png" height="400"><img src="./preview/prettybarplot2d.png" height="400">
 
