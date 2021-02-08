@@ -4,13 +4,18 @@
 #' @param x 2 dimensional frequency table
 #' @param col color of areas 
 #' @param xpos.text x position of text 
-#' @param reorder Logical. If TRUE reorders by colsums of x
+#' @param reorder=FALSE Logical. If TRUE reorders by colsums of x
 #' @export
+#' @example
+#' x<-sample(2010:2020,1000,T)
+#' y<-sample(letters[1:10],1000,T)
+#' stacked.area.chart(table(x,y),re=F)
+#' stacked.area.chart(prop.table(table(x,y),m=1))
 
 stacked.area.chart<-function(x,
       col=(dim(x)[2]+1):2,
       xpos.text=dim(x)[1]+.1,
-      reorder=T,
+      reorder=FALSE,
       xlab="",
       ylab="",
       cex=.9,
