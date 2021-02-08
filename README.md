@@ -1,7 +1,7 @@
-# graphing
+## graphing
 This package contains some convenient graphic functions for the statistical software R.
 
-## prettybarplot()
+### prettybarplot()
 ```r
 x<-sample(letters[1:4],100,T)
 y<-sample(1:3,100,T)
@@ -11,7 +11,7 @@ prettybarplot(table(x,y)) # two dimensional
 <img src="./preview/prettybarplot1d.png" height="400"><img src="./preview/prettybarplot2d.png" height="400">
 
 
-## profileline()
+### profileline()
 ```r
 matrix<-data.frame(matrix(sample(-3:3,1000,T),ncol=20))
 names(matrix)<-paste("Item",1:20); g<-paste("Group",rep(1:3,length=200))
@@ -20,7 +20,7 @@ profileline(matrix,g,main="",N_legend=T,pch="",type="Mean",ex=T,low="low",high="
 ``` 
 <img src="./preview/profileline1.png" height="400"><img src="./preview/profileline2.png" height="400">
 
-## itemplot()
+### itemplot()
 ```r
 x<-factor(sample(letters[1:6],100,T))
 itemplot(x,main="itemplot()",labels=c("I fully\n disagree","I fully\n agree"),legend=F)
@@ -28,12 +28,7 @@ itemplot(x,main="itemplot()",labels=c("I fully\n disagree","I fully\n agree"))
 ``` 
 <img src="./preview/itemplot1.png" height="150"><img src="./preview/itemplot2.png" height="150">
 
-
-
-
-
-
-## CIV(), confidence interval violin plot
+### CIV(), confidence interval violin plot
 ```r
 x<-sample(paste("group",1:4),100,T)
 y<-10+as.numeric(factor(x))*2+rnorm(length(x))
@@ -42,8 +37,7 @@ CIV(x,y,main="Confidence Intervall Violin Plot")
 ``` 
 <img src="./preview/Confidence Intervall Violin Plot.png" height="400">
 
-
-## bp3d(), barplot for 3 dimensional contingency tables
+### bp3d(), barplot for 3 dimensional contingency tables
 ```r
 x <- sample(paste("time",1:4),240,T)
 z <- rep(c("A","B"),each=120)
@@ -52,10 +46,4 @@ bp3d(x,z,y,main="bp3d()",xlab="treatment group")
 
 ``` 
 <img src="./preview/bp3d.png" height="400">
-
-
-
-
-
-
 
