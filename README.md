@@ -16,4 +16,4 @@ prettybarplot(table(x,y))
 x<-sample(letters[1:4],100,T)
 anibarplot(table(x))
 ``` 
-<img src="./preview/ani.barplot.gif" height="400">
+<img src="./preview/ani.barplot.gif">
