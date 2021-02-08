@@ -25,7 +25,7 @@ profileline(matrix,g,main="",N_legend=T,pch="",type="Mean",ex=T,low="low",high="
 x<-factor(sample(letters[1:6],100,T))
 itemplot(x,main="itemplot()",labels=c("I fully\n disagree","I fully\n agree"))
 ``` 
-<img src="./preview/itemplot.png" height="200">
+<img src="./preview/itemplot1.png" height="200"><img src="./preview/itemplot2.png" height="200">
 
 
 
