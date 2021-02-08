@@ -8,7 +8,7 @@ stacked.area.chart(
   x,
   col = (dim(x)[2] + 1):2,
   xpos.text = dim(x)[1] + 0.1,
-  reorder = T,
+  reorder = FALSE,
   xlab = "",
   ylab = "",
   cex = 0.9,
@@ -23,7 +23,7 @@ stacked.area.chart(
 
 \item{xpos.text}{x position of text}
 
-\item{reorder}{Logical. If TRUE reorders by colsums of x}
+\item{reorder=FALSE}{Logical. If TRUE reorders by colsums of x}
 }
 \description{
 stacked area chart
