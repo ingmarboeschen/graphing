@@ -5,4 +5,4 @@ Some convenient graphic functions for R
 ```r
 prettybarplot(1:10)
 ``` 
-![](./preview/prettybarplot1d.png | height=100)
+![](./preview/prettybarplot1d.png =250x250)
