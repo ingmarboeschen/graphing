@@ -2,6 +2,7 @@
 
 export(CIV)
 export(ani.barplot)
+export(catplot)
 export(image2video)
 export(itemplot)
 export(multi.line)
