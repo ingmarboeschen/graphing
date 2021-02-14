@@ -22,6 +22,7 @@
 #' @param bg.increase top-down increase/decrease in background color 
 #' @param bg.from background starting color
 #' @param bg.to background end color
+#' @param legend Logical. If TRUE draws legend
 #' @param axes draw axes
 #' @param cex.axis size of bar labels
 #' @param cex.names size of axis labels
@@ -53,6 +54,7 @@ x, # a one or two dimensional frequency table
   pre="n =", # pre text for absolute frequencies
   post="%", # post text for relative frequencies
   digit=1, # digits to draw percentual frequencies with
+  legend=TRUE,
 # background options
   bg=TRUE, # draw background
   bg.increase=TRUE, # top-down increase/decrease in background color 
@@ -120,7 +122,7 @@ if(length(dim(x))==2){
  # add barplot
  barplot(x,beside=T,main=main,ylab=ylab,xlab=xlab,ylim=c(0,max(x)+max(x)/7),col=col,add=T, border=border,
  cex.names = cex.names,cex.axis = cex.axis,axes = axes,names=names)
- legend("top",rownames(x),pch=15,col=col,horiz=T,bty="n")
+if(legend==T) legend("top",rownames(x),pch=15,col=col,horiz=T,bty="n")
  # text above bars
  if(text==T){
   temp<-length(x[,1])
