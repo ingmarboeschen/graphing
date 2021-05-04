@@ -60,3 +60,10 @@ stacked.area.chart(prop.table(table(x,y),m=1),main="stacked.area.chart()",ylab="
 ``` 
 <img src="./preview/stacked.area.chart1.png" height="400"><img src="./preview/stacked.area.chart2.png" height="400">
 
+### catplot(), draws conditioned or unconditioned frequency table of two multi categorial variables
+```r
+x<-sample(2010:2020,1000,T,.2+(1:11)*.5)
+y<-sample(paste("group",LETTERS[1:10]),1000,T)
+catplot(x,y,main="catplot()",xlab="year")
+``` 
+<img src="./preview/catplot.png" height="400">
