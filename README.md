@@ -58,6 +58,5 @@ stacked.area.chart(table(x,y),main="stacked.area.chart()",ylab="h(x)",xlab="year
 stacked.area.chart(prop.table(table(x,y),m=1),main="stacked.area.chart()",ylab="f(x)",xlab="year")
 
 ``` 
-<img src="./preview/stacked.area.chart1.png" height="400">
-<img src="./preview/stacked.area.chart2.png" height="400">
+<img src="./preview/stacked.area.chart1.png" height="150"><img src="./preview/stacked.area.chart2.png" height="150">
 
