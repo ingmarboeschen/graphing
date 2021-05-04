@@ -78,3 +78,17 @@ multi.line(x=jitter(Time,2),y=weight,group=Diet,points=F,main="multi.line() with
 
 ``` 
 <img src="./preview/multi.line1.png" height="400"><img src="./preview/multi.line2.png" height="400">
+
+### igraph2(), draw network graph from list input
+```r
+x<-list(
+     c("Laura","Ingmar"),
+     c("Peter","Renate","Ingmar","Andrea"),
+     c("Nassim","Ingmar","Sergej"),
+     c("Laura","Rike","Andra"),
+     c("Marlene","Nassim","Christina","Sabine"),
+     c("Bela","Ingmar","Mariola","Nassim"),
+     c("Gloria","Kim","Olek","Bolek"))
+igraph2(x,seed=2)
+``` 
+<img src="./preview/igraph2.png" height="150">
