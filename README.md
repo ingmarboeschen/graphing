@@ -45,6 +45,7 @@ prettybarplot(prop.table(table(x,y)))
 matrix<-data.frame(matrix(sample(-3:3,1000,T),ncol=20))
 names(matrix)<-paste("Item",1:20); g<-paste("Group",rep(1:3,length=200))
 for(i in 1:dim(matrix)[2]){matrix[,i]<-factor(matrix[,i],-3:3,c("fully disagree","2","3","4","5","6","fully agree"))}
+profileline(matrix,g,main="profileline()",N_legend=T,type="Median",ex=T,low="low",high="high",xlab="agreement")
 profileline(matrix,g,main="",N_legend=T,pch="",type="Mean",ex=T,low="low",high="high",xlab="agreement")
 ``` 
 <img src="./preview/profileline1.png" height="400"><img src="./preview/profileline2.png" height="400">
