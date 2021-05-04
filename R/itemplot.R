@@ -7,7 +7,7 @@
 #' @param labels a vector of length 2 with low and high level labels
 #' @param main title
 #' @param dec decimal digits for percentage on bars
-#' @param legend draw legend
+#' @param legend Logical. If TRUE draws legend
 #' @param decmean decimal digits for mean diplayed in legend
 #' @param quant.type quantile type
 #' @param pt.cex median and mean point size
@@ -17,6 +17,7 @@
 #' @export
 #' @examples
 #' x<-factor(sample(letters[1:6],100,T))
+#' itemplot(x,main="itemplot()",labels=c("I fully\n disagree","I fully\n agree"),legend=F)
 #' itemplot(x,main="itemplot()",labels=c("I fully\n disagree","I fully\n agree"))
 
 itemplot <- function(

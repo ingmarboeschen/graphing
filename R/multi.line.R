@@ -1,4 +1,4 @@
-#' multiple lines
+#' multi.line
 #'
 #' Draw multiple regression or lowess lines
 #' @param x a categorial variable (independend variable)
@@ -26,8 +26,9 @@
 #' @examples
 #' data(ChickWeight)
 #' attach(ChickWeight)
-#' Diet<-paste("Diet",Diet)
-#' multi.line(jitter(Time,2),weight,Diet,points=T,main="multi.line()",xlab="time",ylab="weight")
+#' Diet<-paste("Diet",ChickWeight$Diet)
+#' multi.line(x=jitter(Time,2),y=weight,group=Diet,points=T,main="multi.line()",xlab="time",ylab="weight")
+#' multi.line(x=jitter(Time,2),y=weight,group=Diet,points=F,main="multi.line() without points with lowess line",xlab="time",ylab="weight",type="lowess")
 
 multi.line<-function(
 x, # independend metric variable
@@ -42,7 +43,7 @@ xlim=range(x,na.rm=T), # x axis limits
 ylim=range(y,na.rm=T)+c(0,(max(y,na.rm=T)-min(y,na.rm=T))/10),  # y axis limits
 # point options
 points=TRUE, # draw points
-col=rep(1,length(levels(factor(group)))), # point color
+col=rainbow(length(levels(factor(group)))), # point color
 pch=1:length(levels(factor(group))), # point character
 cex=1, # point size
 # line options
@@ -57,16 +58,23 @@ names=paste(levels(group)," ")
 ){
 # factorise group
 group<-factor(group)
+# create vector for coloured points and point characters
+colPoints<-as.character(factor(group,levels(group),col))
+pchPoints<-as.numeric(factor(group,levels(group),pch))
 # count cases with missings
 miss <- sum(rowSums(is.na(data.frame(x,y,group)))>0)
 # delete missings
-d<-data.frame(x,y,group)
+d<-data.frame(x,y,group,colPoints,pchPoints)
 d<-na.omit(d)
-x<-d$x;y<-d$y;group<-d$group
+# randomize order
+d<-d[sample(1:length(d$x),length(d$x)),]
+x<-d$x;y<-d$y;group<-d$group;colPoints<-d$colPoints;pchPoints<-d$pchPoints
+
 
 plot(y~x,type="n",ylim=ylim,main=main,xlab=xlab,ylab=ylab,xlim=xlim,axes=axes)
+if(points==TRUE) points(y~x,col=colPoints,pch=pchPoints,cex=cex)
 for(i in 1:length(levels(group))){
-if(points==TRUE) points(y[group==levels(group)[i]]~x[group==levels(group)[i]],col=col[i],pch=pch[i],cex=cex)
+  #if(points==TRUE) points(y[group==levels(group)[i]]~x[group==levels(group)[i]],col=col[i],pch=pch[i],cex=cex)
 if(type=="line"|type=="both")   abline(lm(y[group==levels(group)[i]]~x[group==levels(group)[i]]),lty=lty[i],col=col[i],lwd=lwd)
 if(type=="lowess"|type=="both") points(lowess(y[group==levels(group)[i]]~x[group==levels(group)[i]]),type="l",lty=lty[i],col=col[i],lwd=lwd)
 }
@@ -82,8 +90,3 @@ if(miss>1) print(paste(miss,"cases were ignored due to cases with missing values
 
 }
 
-## Example
-# data(ChickWeight)
-# attach(ChickWeight)
-# Diet<-paste("Diet",Diet)
-# multi.line(jitter(Time,2),weight,Diet,points=T,type="both",main="multi.line()",xlab="time",ylab="weight")

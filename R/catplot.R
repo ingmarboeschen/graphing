@@ -9,10 +9,11 @@
 #' @param ylab="" y axis label
 #' @param marginleft=5 left margin space
 #' @param cexmax=2 max size of squares
+#' @export
 #' @example 
-#' x<-sample(2010:2020,1000,T)
-#' y<-sample(letters[1:10],1000,T)
-#' catplot(x,y)
+#' x<-sample(2010:2020,1000,T,.2+(1:11)*.5)
+#' y<-sample(paste("group",LETTERS[1:10]),1000,T)
+#' catplot(x,y,main="catplot()",xlab="year")
 
 catplot<-function(
 x, # multi categorial x variable
