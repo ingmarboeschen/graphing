@@ -21,6 +21,7 @@ prettybarplot(
   pre = "n =",
   post = "\%",
   digit = 1,
+  legend = TRUE,
   bg = TRUE,
   bg.increase = TRUE,
   bg.from = "grey",
@@ -62,6 +63,8 @@ prettybarplot(
 \item{post}{post text for relative frequencies}
 
 \item{digit}{digits to draw percentual frequencies with}
+
+\item{legend}{Logical. If TRUE draws legend}
 
 \item{bg}{draw background}
 

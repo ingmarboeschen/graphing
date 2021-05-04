@@ -6,13 +6,17 @@
 \usage{
 stacked.area.chart(
   x,
+  type = "area",
   col = (dim(x)[2] + 1):2,
   xpos.text = dim(x)[1] + 0.1,
   reorder = FALSE,
+  labels = TRUE,
+  main = "",
   xlab = "",
   ylab = "",
   cex = 0.9,
-  xlim = c(1, length(rownames(x))),
+  cex.axis = 1,
+  las = 1,
   ylim = c(0, max(mat))
 )
 }
@@ -23,8 +27,24 @@ stacked.area.chart(
 
 \item{xpos.text}{x position of text}
 
-\item{reorder=FALSE}{Logical. If TRUE reorders by colsums of x}
+\item{type="area"}{type of grapf ("area" or "line")}
+
+\item{labels=TRUE}{Logicical. If TRUE labels of areas are drawn on the right side of the plot}
+
+\item{reorder=FALSE}{Logical. If TRUE reorders by frequency of y}
+
+\item{xlab=""}{x axis label}
+
+\item{ylab=""}{y axis label}
+
+\item{cex=.9}{character expansation of area labels}
+
+\item{cex.axis=1}{character expansation of axis labels}
+
+\item{las=1}{las for y axis labels}
+
+\item{ylim=c(0, max(mat)}{limits of x axis}
 }
 \description{
-stacked area chart
+stacked area chart for 2 dimensional frequency tables
 }

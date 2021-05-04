@@ -41,7 +41,7 @@ itemplot(
 
 \item{dec}{decimal digits for percentage on bars}
 
-\item{legend}{draw legend}
+\item{legend}{Logical. If TRUE draws legend}
 
 \item{decmean}{decimal digits for mean diplayed in legend}
 
@@ -60,5 +60,6 @@ Function to draw distribution of Likert scaled item with relative frequencies, m
 }
 \examples{
 x<-factor(sample(letters[1:6],100,T))
+itemplot(x,main="itemplot()",labels=c("I fully\n disagree","I fully\n agree"),legend=F)
 itemplot(x,main="itemplot()",labels=c("I fully\n disagree","I fully\n agree"))
 }

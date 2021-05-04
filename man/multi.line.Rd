@@ -2,7 +2,7 @@
 % Please edit documentation in R/multi.line.R
 \name{multi.line}
 \alias{multi.line}
-\title{multiple lines}
+\title{multi.line}
 \usage{
 multi.line(
   x,
@@ -15,7 +15,7 @@ multi.line(
   xlim = range(x, na.rm = T),
   ylim = range(y, na.rm = T) + c(0, (max(y, na.rm = T) - min(y, na.rm = T))/10),
   points = TRUE,
-  col = rep(1, length(levels(factor(group)))),
+  col = rainbow(length(levels(factor(group)))),
   pch = 1:length(levels(factor(group))),
   cex = 1,
   lines = TRUE,
@@ -74,6 +74,7 @@ Draw multiple regression or lowess lines
 \examples{
 data(ChickWeight)
 attach(ChickWeight)
-Diet<-paste("Diet",Diet)
-multi.line(jitter(Time,2),weight,Diet,points=T,main="multi.line()",xlab="time",ylab="weight")
+Diet<-paste("Diet",ChickWeight$Diet)
+multi.line(x=jitter(Time,2),y=weight,group=Diet,points=T,main="multi.line()",xlab="time",ylab="weight")
+multi.line(x=jitter(Time,2),y=weight,group=Diet,points=F,main="multi.line() without points with lowess line",xlab="time",ylab="weight",type="lowess")
 }
