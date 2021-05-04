@@ -1,6 +1,33 @@
 ## graphing
 This package contains some convenient graphic functions for the statistical software R.
 
+### Built With
+* [R Core 3.6](https://www.r-project.org)
+* [devtools](https://github.com/r-lib/devtools) package
+
+### The function igraph2() depends on the R packages
+* [tm](https://cran.r-project.org/web/packages/tm/tm.pdf)
+* [igraph](https://igraph.org/r/)
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+To install **graphing** run the following steps:
+
+### Installation
+1. Install and load the [devtools](https://github.com/r-lib/devtools) package
+``` r
+# Install the devtools package
+install.packages("devtools")
+# Load the devtools package
+library(devtools)
+``` 
+2. Install *graphing from [github](https://github.com/ingmarboeschen/graphing)
+``` r
+# Install JATSdecoder from github
+install_github("ingmarboeschen/graphing")
+```
+<!-- Examples -->
 ### prettybarplot()
 ```r
 x<-sample(letters[1:4],100,T)
