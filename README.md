@@ -5,7 +5,7 @@ This package contains some convenient graphic functions for the statistical soft
 * [R Core 3.6](https://www.r-project.org)
 * [devtools](https://github.com/r-lib/devtools) package
 
-### The function igraph2() depends on the R packages
+The function igraph2() depends on the R packages
 * [tm](https://cran.r-project.org/web/packages/tm/tm.pdf)
 * [igraph](https://igraph.org/r/)
 
