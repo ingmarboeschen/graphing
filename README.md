@@ -67,3 +67,14 @@ y<-sample(paste("group",LETTERS[1:10]),1000,T)
 catplot(x,y,main="catplot()",xlab="year")
 ``` 
 <img src="./preview/catplot.png" height="400">
+
+### multi.line(), draws multiple regression or lowess lines with a grouping variable
+```r
+data(ChickWeight)
+attach(ChickWeight)
+Diet<-paste("Diet",ChickWeight$Diet)
+multi.line(x=jitter(Time,2),y=weight,group=Diet,points=T,main="multi.line()",xlab="time",ylab="weight")
+multi.line(x=jitter(Time,2),y=weight,group=Diet,points=F,main="multi.line() without points with lowess line",xlab="time",ylab="weight",type="lowess")
+
+``` 
+<img src="./preview/multi.line1.png" height="400"><img src="./preview/multi.line2.png" height="400">
