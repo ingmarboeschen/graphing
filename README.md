@@ -91,4 +91,4 @@ x<-list(
      c("Gloria","Kim","Olek","Bolek"))
 igraph2(x,seed=2)
 ``` 
-<img src="./preview/igraph2.png" height="150">
+<img src="./preview/igraph2.png" height="400">
