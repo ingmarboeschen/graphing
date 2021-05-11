@@ -1,6 +1,6 @@
 #' stacked area chart
 #'
-#' stacked area chart
+#' stacked area chart for 2 dimensional frequency tables
 #' @param x 2 dimensional frequency table
 #' @param type="area" type of grapf ("area" or "line")
 #' @param col color of areas 

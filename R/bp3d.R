@@ -15,8 +15,7 @@
 #' @param boxcol color of boxes behind groups
 #' @param legend draw legend
 #' @param locator location of legend: "topright", "right" "bottomright"
-
-
+#' @export
 #' @examples
 #' x <- sample(paste("time",1:4),240,T)
 #' z <- rep(c("A","B"),each=120)

@@ -17,25 +17,31 @@
 #' @param min.n numerical. Absolute minimum of involvement per element
 #' @param min.freq numerical. Relative minimum of involvement per element
 #' @param max.freq numerical. Relative maximum of involvement per element
-#' @param layout numerical. Select out of:\n # 1: layout.fruchterman.reingold(g)\n# 2: layout.random(g)\n# 3: layout.kamada.kawai(g)\n# 4: layout.circle(g)\n# 5: layout.reingold.tilford(g)\n# 6: layout1 <- layout.sphere(g)
+#' @param layout numerical. Select out of:
+#' 1: layout.fruchterman.reingold(g)
+#' 2: layout.random(g)
+#' 3: layout.kamada.kawai(g)
+#' 4: layout.circle(g)
+#' 5: layout.reingold.tilford(g)
+#' 6: layout1 <- layout.sphere(g)
 #' @export
 #' @example 
 #' x<-list(
+#'      c("Laura","Ingmar"),
 #'      c("Peter","Renate","Ingmar","Andrea"),
 #'      c("Nassim","Ingmar","Sergej"),
+#'      c("Laura","Rike","Andra"),
 #'      c("Marlene","Nassim","Christina","Sabine"),
-#'      c("Bela","Ingmar","Mariola"),
+#'      c("Bela","Ingmar","Mariola","Nassim"),
 #'      c("Gloria","Kim","Olek","Bolek"))
-#' igraph2(x,low=F)
-#library(tm)
-#library(igraph)
+#' igraph2(x,seed=2)
 igraph2<-function(x,
                   freq=FALSE, # display frequency of connections in edge labels
                   label.cex=1.7, # node label size
                   vertex.size=5, # 
                   split2words=FALSE, # each element is split at spaces
                   rm.punctuation=FALSE, # space is a punctuation
-                  lowerize=TRUE, # lowerize to unify
+                  lowerize=FALSE, # lowerize to unify
                   stemming=FALSE, # enable stemming
                   capitalize=FALSE, # capitalize to display
                   rm.stopwords=FALSE, # use stop word removal
@@ -46,12 +52,6 @@ igraph2<-function(x,
                   min.freq=0, # relative minimum of involvement per element
                   max.freq=1, # relative maximum of involvement per element
                   layout=1 # select from:
-# 1: layout.fruchterman.reingold(g)
-# 2: layout.random(g)
-# 3: layout.kamada.kawai(g)
-# 4: layout.circle(g)
-# 5: layout.reingold.tilford(g)
-# 6: layout1 <- layout.sphere(g)
 ){
 # split at ' ,| '
   options(warn = -1)
@@ -70,7 +70,7 @@ igraph2<-function(x,
   docs<-data.frame(text=unlist(lapply(x,paste,collapse=" ")))
   corpus <- tm::Corpus(tm::VectorSource(docs$text))
   # clean up white spaces
-  corpus =  tm::tm_map(corpus, stripWhitespace)
+#  corpus =  tm::tm_map(corpus,stripWhitespace)
   #create TDM
   tdm <-tm::TermDocumentMatrix(corpus,control = list(
                                     stripWhitespace=TRUE,
@@ -104,7 +104,7 @@ if(capitalize==TRUE) colnames(tdm.matrix)<-gsub("^([[:lower:]])|([- ][[:lower:]]
   # set labels and degrees of vertices
   igraph::V(g)$label <- igraph::V(g)$name
   igraph::V(g)$degree <- igraph::degree(g)
-  igraph::V(g)$color<-rep("lightblue",length(V(g)))
+  igraph::V(g)$color<-rep("lightblue",length(igraph::V(g)))
   igraph::V(g)$label.cex <- label.cex * igraph::V(g)$degree/max(igraph::V(g)$degree)+.7
  # V(g)$vertex.size<- vertex.size * V(g)$degree/max(V(g)$degree)
   node.size<-setNames(vertex.size*(igraph::V(g)$degree/max(igraph::V(g)$degree)+.1),igraph::V(g)$label)
@@ -130,7 +130,7 @@ if(freq==TRUE)  igraph::edge_attr(g, "label") <- as.character(unlist(igraph::edg
     if(tkplot==TRUE){
       igraph::tkplot(g, layout=layout1,vertex.color=igraph::V(g)$color,vertex.size=node.size)
       }else{
-        plot(g, layout=layout1,vertex.color=V(g)$color,vertex.size=node.size)
+        plot(g, layout=layout1,vertex.color=igraph::V(g)$color,vertex.size=node.size)
         }
 }
 
