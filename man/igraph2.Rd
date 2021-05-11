@@ -57,7 +57,13 @@ igraph2(
 
 \item{max.freq}{numerical. Relative maximum of involvement per element}
 
-\item{layout}{numerical. Select out of:\n # 1: layout.fruchterman.reingold(g)\n# 2: layout.random(g)\n# 3: layout.kamada.kawai(g)\n# 4: layout.circle(g)\n# 5: layout.reingold.tilford(g)\n# 6: layout1 <- layout.sphere(g)}
+\item{layout}{numerical. Select out of:
+1: layout.fruchterman.reingold(g)
+2: layout.random(g)
+3: layout.kamada.kawai(g)
+4: layout.circle(g)
+5: layout.reingold.tilford(g)
+6: layout1 <- layout.sphere(g)}
 }
 \description{
 draw network graph from list input
