@@ -2,6 +2,7 @@
 
 export(CIV)
 export(ani.barplot)
+export(bp3d)
 export(catplot)
 export(igraph2)
 export(image2video)
@@ -11,3 +12,4 @@ export(multireg)
 export(prettybarplot)
 export(profileline)
 export(stacked.area.chart)
+export(worldmap2)

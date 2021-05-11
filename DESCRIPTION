@@ -5,7 +5,7 @@ Authors@R: person("Ingmar", "Böschen", email = "ingmar.boeschen@sumdata.de", ro
 Description: Collection of descriptive graphing functions.
 Depends: R (>= 3.1.1)
 Imports: 
-    utils, stats, tm, igraph
+    utils, stats, grDevices, tm, igraph, countrycode, rworldmap, geosphere, rgeos, RColorBrewer
 License: CC0
 Encoding: UTF-8
 LazyData: true
