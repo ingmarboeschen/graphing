@@ -135,6 +135,6 @@ igraph2(x)
  c("Germany","Spain"),c("Germany","Spain"),c("United States","Germany"),
  c("Germany","Cuba","Bolivia","South Africa"))
 worldmap2(x)
-# Note: arguments legend1 and legend2 need adjustments related to your output scaling 
+# Note: arguments legend1 and legend2 need adjustments that dependend on the resolution of the resulting graph. 
 ``` 
 <img src="./preview/worldmap2.png" height="400">
