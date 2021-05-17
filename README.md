@@ -5,6 +5,7 @@ This package contains some convenient graphic functions for the statistical soft
 * [R Core 3.6](https://www.r-project.org)
 * [devtools](https://github.com/r-lib/devtools) package
 
+### Depends on
 The function igraph2() depends on the R packages
 * [tm](https://cran.r-project.org/web/packages/tm/tm.pdf)
 * [igraph](https://igraph.org/r/)
@@ -15,6 +16,9 @@ The function worldmap2() depends on the R packages
 * [geosphere](https://cran.r-project.org/web/packages/geosphere/geosphere.pdf)
 * [rgeos](https://cran.r-project.org/web/packages/rgeos/rgeos.pdf)
 * [RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/RColorBrewer.pdf)
+
+The function orcid2name() depends on the R package
+* [rorcid](https://cran.r-project.org/web/packages/rorcid/rorcid.pdf)
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -138,3 +142,12 @@ worldmap2(x)
 # Note: arguments legend1 and legend2 need adjustments that dependend on the resolution of the resulting graph. 
 ``` 
 <img src="./preview/worldmap2.png" height="400">
+
+
+### orcid2name, convert ORCID author identification codes to 'surname, name'
+'''r
+# Note: need an ORCID-account to authenticate to the ORCID api
+name<-c("https://orcid.org/0000-0003-1159-3991")
+orcid2name(name)
+'''
+
