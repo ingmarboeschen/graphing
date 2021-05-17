@@ -52,9 +52,6 @@ prettybarplot(prop.table(table(x,y)))
 ``` 
 <img src="./preview/prettybarplot1d.png" height="400"><img src="./preview/prettybarplot2d.png" height="400">
 
-<!-- USAGE -->
-## Usage
-
 
 ### profileline()
 ```r
