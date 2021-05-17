@@ -39,7 +39,7 @@ library(devtools)
 install_github("ingmarboeschen/graphing")
 ```
 <!-- Examples -->
-### Examples
+## Examples
 
 ### prettybarplot()
 ```r
