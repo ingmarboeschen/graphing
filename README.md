@@ -33,7 +33,7 @@ install.packages("devtools")
 # Load the devtools package
 library(devtools)
 ``` 
-2. Install **graphing** from [github](https://github.com/ingmarboeschen/graphing)
+2. Install **graphing** from [https://github.com/ingmarboeschen/graphing](https://github.com/ingmarboeschen/graphing)
 ``` r
 # Install JATSdecoder from github
 install_github("ingmarboeschen/graphing")
