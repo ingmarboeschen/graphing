@@ -1,4 +1,4 @@
-## graphing
+## The 'graphing' package
 This package contains some convenient graphic functions for the statistical software R.
 
 ### Built With
