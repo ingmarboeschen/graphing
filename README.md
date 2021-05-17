@@ -9,6 +9,13 @@ The function igraph2() depends on the R packages
 * [tm](https://cran.r-project.org/web/packages/tm/tm.pdf)
 * [igraph](https://igraph.org/r/)
 
+The function worldmap2() depends on the R packages
+* [worldmap](https://cran.r-project.org/web/packages/rworldmap/rworldmap.pdf)
+* [countrycode](https://cran.r-project.org/web/packages/countrycode/countrycode.pdf)
+* [geosphere](https://cran.r-project.org/web/packages/geosphere/geosphere.pdf)
+* [rgeos](https://cran.r-project.org/web/packages/rgeos/rgeos.pdf)
+* [RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/RColorBrewer.pdf)
+* 
 <!-- GETTING STARTED -->
 ## Getting Started
 
@@ -120,3 +127,17 @@ x<-list(
 igraph2(x,seed=2)
 ``` 
 <img src="./preview/igraph2.png" height="400">
+
+### worlmap2(), draw network country and country connection frequency from list of countries
+```r
+x<-list(
+     c("Laura","Ingmar"),
+     c("Peter","Renate","Ingmar","Andrea"),
+     c("Nassim","Ingmar","Sergej"),
+     c("Laura","Rike","Andra"),
+     c("Marlene","Nassim","Christina","Sabine"),
+     c("Bela","Ingmar","Mariola","Nassim"),
+     c("Gloria","Kim","Olek","Bolek"))
+worldmap2(x)
+``` 
+<img src="./preview/worldmap2.png" height="400">
