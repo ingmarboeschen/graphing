@@ -114,7 +114,7 @@ multi.line(x=jitter(Time,2),y=weight,group=Diet,points=F,main="multi.line() with
 ``` 
 <img src="./preview/multi.line1.png" height="400"><img src="./preview/multi.line2.png" height="400">
 
-### igraph2(), draw network graph from list input
+### igraph2(), network graph from list input
 ```r
 x<-list(
      c("Laura","Ingmar"),
@@ -124,16 +124,17 @@ x<-list(
      c("Marlene","Nassim","Christina","Sabine"),
      c("Bela","Ingmar","Mariola","Nassim"),
      c("Gloria","Kim","Olek","Bolek"))
-igraph2(x,seed=2)
+igraph2(x)
 ``` 
 <img src="./preview/igraph2.png" height="400">
 
-### worlmap2(), draw network country and country connection frequency from list of countries
+### worlmap2(), country and country connection frequency from list of countries
 ```r
  x<-list(c("Germany","Austria","S. Korea"),
  c("Germany","Austria","S. Korea"),c("Germany","Austria","S. Korea"),
  c("Germany","Spain"),c("Germany","Spain"),c("United States","Germany"),
  c("Germany","Cuba","Bolivia","South Africa"))
 worldmap2(x)
+# Note: arguments legend1 and legend2 need adjustments related to your output scaling 
 ``` 
 <img src="./preview/worldmap2.png" height="400">
