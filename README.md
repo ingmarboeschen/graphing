@@ -6,18 +6,18 @@ This package contains some convenient graphic functions for the statistical soft
 * [devtools](https://github.com/r-lib/devtools) package
 
 ### Depends on
-The function igraph2() depends on the R packages
+The function **igraph2()** depends on the R packages
 * [tm](https://cran.r-project.org/web/packages/tm/tm.pdf)
 * [igraph](https://igraph.org/r/)
 
-The function worldmap2() depends on the R packages
+The function **worldmap2()** depends on the R packages
 * [worldmap](https://cran.r-project.org/web/packages/rworldmap/rworldmap.pdf)
 * [countrycode](https://cran.r-project.org/web/packages/countrycode/countrycode.pdf)
 * [geosphere](https://cran.r-project.org/web/packages/geosphere/geosphere.pdf)
 * [rgeos](https://cran.r-project.org/web/packages/rgeos/rgeos.pdf)
 * [RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/RColorBrewer.pdf)
 
-The function orcid2name() depends on the R package
+The function **orcid2name()** depends on the R package
 * [rorcid](https://cran.r-project.org/web/packages/rorcid/rorcid.pdf)
 
 <!-- GETTING STARTED -->
@@ -33,7 +33,7 @@ install.packages("devtools")
 # Load the devtools package
 library(devtools)
 ``` 
-2. Install *graphing from [github](https://github.com/ingmarboeschen/graphing)
+2. Install **graphing** from [github](https://github.com/ingmarboeschen/graphing)
 ``` r
 # Install JATSdecoder from github
 install_github("ingmarboeschen/graphing")
