@@ -130,14 +130,10 @@ igraph2(x,seed=2)
 
 ### worlmap2(), draw network country and country connection frequency from list of countries
 ```r
-x<-list(
-     c("Laura","Ingmar"),
-     c("Peter","Renate","Ingmar","Andrea"),
-     c("Nassim","Ingmar","Sergej"),
-     c("Laura","Rike","Andra"),
-     c("Marlene","Nassim","Christina","Sabine"),
-     c("Bela","Ingmar","Mariola","Nassim"),
-     c("Gloria","Kim","Olek","Bolek"))
+ x<-list(c("Germany","Austria","S. Korea"),
+ c("Germany","Austria","S. Korea"),c("Germany","Austria","S. Korea"),
+ c("Germany","Spain"),c("Germany","Spain"),c("United States","Germany"),
+ c("Germany","Cuba","Bolivia","South Africa"))
 worldmap2(x)
 ``` 
 <img src="./preview/worldmap2.png" height="400">
