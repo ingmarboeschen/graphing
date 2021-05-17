@@ -146,7 +146,7 @@ worldmap2(x)
 
 ### orcid2name, convert ORCID author identification codes to 'surname, name'
 ```r
-# Note: need an ORCID-account to authenticate to the ORCID api
+# Note: You need an ORCID account to authenticate to the ORCID api
 name<-c("https://orcid.org/0000-0003-1159-3991")
 orcid2name(name)
 ```
