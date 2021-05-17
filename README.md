@@ -15,7 +15,7 @@ The function worldmap2() depends on the R packages
 * [geosphere](https://cran.r-project.org/web/packages/geosphere/geosphere.pdf)
 * [rgeos](https://cran.r-project.org/web/packages/rgeos/rgeos.pdf)
 * [RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/RColorBrewer.pdf)
-* 
+
 <!-- GETTING STARTED -->
 ## Getting Started
 
