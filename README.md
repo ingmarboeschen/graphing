@@ -39,6 +39,8 @@ library(devtools)
 install_github("ingmarboeschen/graphing")
 ```
 <!-- Examples -->
+### Examples
+
 ### prettybarplot()
 ```r
 x<-sample(letters[1:4],100,T)
