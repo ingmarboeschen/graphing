@@ -68,3 +68,14 @@ igraph2(
 \description{
 draw network graph from list input
 }
+\examples{
+x<-list(
+     c("Laura","Ingmar"),
+     c("Peter","Renate","Ingmar","Andrea"),
+     c("Nassim","Ingmar","Sergej"),
+     c("Laura","Rike","Andra"),
+     c("Marlene","Nassim","Christina","Sabine"),
+     c("Bela","Ingmar","Mariola","Nassim"),
+     c("Gloria","Kim","Olek","Bolek"))
+igraph2(x,seed=2)
+}

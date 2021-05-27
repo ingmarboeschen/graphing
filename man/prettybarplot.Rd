@@ -18,7 +18,7 @@ prettybarplot(
   text = TRUE,
   cex = 1,
   coltext = 1,
-  pre = "n =",
+  pre = "n = ",
   post = "\%",
   digit = 1,
   legend = TRUE,

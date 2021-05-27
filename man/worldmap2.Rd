@@ -57,7 +57,7 @@ worldmap2
 }
 \examples{
 worldmap2(country=list(c("Germany","Austria","S. Korea"),
-c("Germany","Austria","S. Korea"),c("Germany","Austria","S. Korea"),
+c("Germany","Domenican Rep.","S. Korea"),c("Germany","Austria","S. Korea"),
 c("Germany","Spain"),c("Germany","Spain"),c("United States","Germany"),
 c("Germany","Cuba","Bolivia","South Africa")),
           connection=T,legend=T,xpd=F,
