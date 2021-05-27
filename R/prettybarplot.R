@@ -51,7 +51,7 @@ x, # a one or two dimensional frequency table
   text=TRUE, # draw text on bars
   cex=1, # text size
   coltext=1, # color of text on bars
-  pre="n =", # pre text for absolute frequencies
+  pre="n = ", # pre text for absolute frequencies
   post="%", # post text for relative frequencies
   digit=1, # digits to draw percentual frequencies with
   legend=TRUE,
@@ -97,8 +97,8 @@ if(length(dim(x))==1){
  # text above bars
  if(text==T){
   for(i in 1:length((x))){
-  if(text==T&sum(x)>1.5) text((-.5+space+i+((i-1)*space)),(x[i]),paste(pre,round(x[i]),sep=" "),pos=3,cex=cex,col=coltext)
-  if(text==T&sum(x)<=1.5) text((-.5+space+i+((i-1)*space)),(x[i]),paste(round(x[i]*100,digit),post,sep=" "),pos=3,cex=cex,col=coltext)
+  if(text==T&sum(x)>1.5) text((-.5+space+i+((i-1)*space)),(x[i]),paste(pre,format(round(x[i]),big.mark=","),sep=""),pos=3,cex=cex,col=coltext)
+  if(text==T&sum(x)<=1.5) text((-.5+space+i+((i-1)*space)),(x[i]),paste(round(x[i]*100,digit),post,sep=""),pos=3,cex=cex,col=coltext)
   }}
 }
 

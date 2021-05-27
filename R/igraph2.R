@@ -25,7 +25,7 @@
 #' 5: layout.reingold.tilford(g)
 #' 6: layout1 <- layout.sphere(g)
 #' @export
-#' @example 
+#' @examples 
 #' x<-list(
 #'      c("Laura","Ingmar"),
 #'      c("Peter","Renate","Ingmar","Andrea"),
@@ -64,6 +64,11 @@ igraph2<-function(x,
   }
   # remove emty cells
   x<-lapply(x,function(x) x[nchar(x)>1]) 
+  # check if all have no connection (to keep simplify)
+  ifelse(sum(unlist(lapply(x,length))==1)==length(x),simp<-FALSE,simp<-TRUE)
+  # if length==1 repeat entry 
+  x<-lapply(x,function(y) ifelse(length(y)==1,return(rep(y,2)),return(y)))
+  
   # tolower
   if(lowerize==TRUE) x<-lapply(x,tolower) 
   # create data frame and corpus
@@ -92,15 +97,15 @@ igraph2<-function(x,
   tdm.matrix[tdm.matrix>=1] <- 1
   # coinciding term
   tdm.matrix <- tdm.matrix %*% t(tdm.matrix)
-rownames(tdm.matrix)<-gsub("_"," ",rownames(tdm.matrix))
-colnames(tdm.matrix)<-gsub("_"," ",colnames(tdm.matrix))
-# capitalize initial letters
-if(capitalize==TRUE) rownames(tdm.matrix)<-gsub("^([[:lower:]])|([- ][[:lower:]])",toupper("\\U\\1\\2"),perl=T,rownames(tdm.matrix))
+  rownames(tdm.matrix)<-gsub("_"," ",rownames(tdm.matrix))
+  colnames(tdm.matrix)<-gsub("_"," ",colnames(tdm.matrix))
+  # capitalize initial letters
+  if(capitalize==TRUE) rownames(tdm.matrix)<-gsub("^([[:lower:]])|([- ][[:lower:]])",toupper("\\U\\1\\2"),perl=T,rownames(tdm.matrix))
 if(capitalize==TRUE) colnames(tdm.matrix)<-gsub("^([[:lower:]])|([- ][[:lower:]])",toupper("\\U\\1\\2"),perl=T,colnames(tdm.matrix))
 # build a graph from the above matrix
   g <- igraph::graph.adjacency(tdm.matrix , weighted=T, mode= "undirected")
   # remove loops
-  g <- igraph::simplify(g)
+  if(simp) g <- igraph::simplify(g)
   # set labels and degrees of vertices
   igraph::V(g)$label <- igraph::V(g)$name
   igraph::V(g)$degree <- igraph::degree(g)
@@ -113,7 +118,7 @@ if(capitalize==TRUE) colnames(tdm.matrix)<-gsub("^([[:lower:]])|([- ][[:lower:]]
   igraph::V(g)$label.color <- rgb(0, 0, .5, 1)
   igraph::V(g)$frame.color <- NA
   # set labels and degrees of edges
-if(freq==TRUE)  igraph::edge_attr(g, "label") <- as.character(unlist(igraph::edge_attr(g))) 
+  if(freq==TRUE)  igraph::edge_attr(g, "label") <- as.character(unlist(igraph::edge_attr(g))) 
   #  egam <- (log(E(g)$weight+.4)) / max(log(E(g)$weight+.4))
   #  E(g)$color <- rgb(.5, .5, 0, egam)
   #  E(g)$width <- egam
@@ -131,7 +136,8 @@ if(freq==TRUE)  igraph::edge_attr(g, "label") <- as.character(unlist(igraph::edg
       igraph::tkplot(g, layout=layout1,vertex.color=igraph::V(g)$color,vertex.size=node.size)
       }else{
         plot(g, layout=layout1,vertex.color=igraph::V(g)$color,vertex.size=node.size)
-        }
+  }
 }
+
 
 
