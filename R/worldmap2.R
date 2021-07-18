@@ -3,12 +3,12 @@
 #require(geosphere)
 #require(rgeos)
 #library(RColorBrewer)
-#load("/home/ingmar/JATSdecoderEvaluation/01_JATSdecoder/JATSdecoder - Language Resources and Evaluation/tags/country.rda")
-#country<-head(country,2000)
 
 #' worldmap2
-#' @param country a list with vectors of country names
-#' @param connection logical. If TRUE draws country connections
+#' @param country a list with vectors or a frequency table of country names
+#' @param connections an optional vector with connections seperated with " - " (e.g.: "Germany - USA")
+#' @param reduce2country character. reduces connections to those of one specific country 
+#' @param connect logical. If TRUE draws country connections
 #' @param palette colour palette from brewer.pal(). 
 #'  One of 'Blues', 'BuGn', 'BuPu', 'GnBu', 'Greens', 'Greys', 
 #'  'Oranges', 'OrRd', 'PuBu', 'PuBuGn', 'PuRd', 'Purples', 
@@ -30,12 +30,14 @@
 #' worldmap2(country=list(c("Germany","Austria","S. Korea"),
 #' c("Germany","Domenican Rep.","S. Korea"),c("Germany","Austria","S. Korea"),
 #' c("Germany","Spain"),c("Germany","Spain"),c("United States","Germany"),
-#' c("Germany","Cuba","Bolivia","South Africa")),
-#'           connection=T,legend=T,xpd=F,
+#' c("Germany","Cuba","Bolivia","South Africa")),reduce2country="USA",
+#'           #connections=list("NA"," - ",c("Germany - USA","Germany - Peru"),"Germany - USA","Germany - Austria","Germany - USA","Germany - USA"),legend=T,xpd=F,
 #'           legend1=-10,legend2=-15)
 
 worldmap2<-function(country,
-                    connections=TRUE,
+                    connect=TRUE,
+                    connections=NULL,
+                    reduce2country=NULL,
                     region=NULL, # one of : (eurasia africa latin america north america uk oceania asia )
                     main="country and country connection frequency",
                     ocean="grey95",
@@ -49,27 +51,49 @@ worldmap2<-function(country,
                     legend2adjust=0
    ){
   tab<-NULL
-  # if is vector convert to list
-  if(is.vector(country)) country<-as.list(country)
-  # if country is empty
-  if(sum(unlist(lapply(country,length)))==0) country=""
+  temp<-FALSE
+  if(is.table(country)&!is.table(connections)) connect<-FALSE
   # set graphic parameters
   par(mar=mar,mai=mai,xpd=xpd,bg=ifelse(xpd,ocean,"white"))
-  # recode countries
-  country<-lapply(country,function(x) gsub("S. Korea","South Korea",x))
-  country<-lapply(country,function(x) gsub("N. Korea","North Korea",x))
-  country<-lapply(country,function(x) gsub("Czech Rep\\.","Czech Republic",x))
-  country<-lapply(country,function(x) gsub("Sint Maarten","Saint-Martin",x))
-  country<-lapply(country,function(x) gsub("^Micronesia$","Federated States of Micronesia",x))
-  country<-lapply(country,function(x) gsub("Bosnia and Herz\\.","Bosnia and Herzegovina",x))
-  country<-lapply(country,function(x) gsub("Dominican Rep\\.","Dominican Republic",x))
-  country<-lapply(country,function(x) gsub("Eq\\. Guinea","Equatorial Guinea",x))
-  country<-lapply(country,function(x) gsub("Fr\\. Polynesia","French Polynesia",x))
-  country<-lapply(country,function(x) gsub("GAZA$","Gaza Strip",x))
+# for vector and list input
+  if(!is.table(country)){
+    # if is vector convert to list
+    if(is.vector(country)) country<-as.list(country) 
+    # if country is empty
+    if(sum(unlist(lapply(country,length)))==0) country=""
+    # recode countries
+    country<-lapply(country,function(x) gsub("S. Korea","South Korea",x))
+    country<-lapply(country,function(x) gsub("N. Korea","North Korea",x))
+    country<-lapply(country,function(x) gsub("Czech Rep\\.","Czech Republic",x))
+    country<-lapply(country,function(x) gsub("Sint Maarten","Saint-Martin",x))
+    country<-lapply(country,function(x) gsub("^Micronesia$","Federated States of Micronesia",x))
+    country<-lapply(country,function(x) gsub("Bosnia and Herz\\.","Bosnia and Herzegovina",x))
+    country<-lapply(country,function(x) gsub("Dom[ei]nican Rep\\.","Dominican Republic",x))
+    country<-lapply(country,function(x) gsub("Eq\\. Guinea","Equatorial Guinea",x))
+    country<-lapply(country,function(x) gsub("Fr\\. Polynesia","French Polynesia",x))
+    country<-lapply(country,function(x) gsub("GAZA","Gaza Strip",x))
   
-  # frequency table of countries
-  data<-data.frame(table(unlist(country)))
-  colnames(data)<-c("country","value")
+    # frequency table of countries
+    data<-data.frame(table(unlist(country)))
+    colnames(data)<-c("country","value")
+  }
+  if(is.table(country)){
+    names(country)<-gsub("S. Korea","South Korea",names(country))
+    names(country)<-gsub("N. Korea","North Korea",names(country))
+    names(country)<-gsub("Czech Rep\\.","Czech Republic",names(country))
+    names(country)<-gsub("Sint Maarten","Saint-Martin",names(country))
+    names(country)<-gsub("^Micronesia$","Federated States of Micronesia",names(country))
+    names(country)<-gsub("Bosnia and Herz\\.","Bosnia and Herzegovina",names(country))
+    names(country)<-gsub("Dom[ei]nican Rep\\.","Dominican Republic",names(country))
+    names(country)<-gsub("Eq\\. Guinea","Equatorial Guinea",names(country))
+    names(country)<-gsub("Fr\\. Polynesia","French Polynesia",names(country))
+    names(country)<-gsub("GAZA","Gaza Strip",names(country))
+    
+    # frequency table of countries
+    data<-data.frame(country)
+    colnames(data)<-c("country","value")
+    }
+  
   # get scale [0;scale]
   scale<-10^(nchar(max(data$value))-1)
   # if scale is too large -> shorten
@@ -125,23 +149,51 @@ worldmap2<-function(country,
   }
 #########################################
 # add connections
-if(connections==TRUE&sum(unlist(lapply(country,length))>1)>0){
-  country<-lapply(country,rename.country)
+if(connect==TRUE&!is.null(connections)){
+  # prepare
   worldmap<-rworldmap::getMap(res="low")
   centroids<-rgeos::gCentroid(worldmap,byid=T)
   d<-as.data.frame(centroids)
-  # connection matrix
-  if(!is.list(country)){net<-future.apply::future_lapply(list(country),get.net)
-    }else net<-future.apply::future_lapply(country,get.net)
-  net<-do.call(rbind,net)
-  # frequency of country connections
-  connection<-paste(net[,1],net[,2],sep=" - ")
-  tab<-table(connection)
+  # get country connections if country is not a table and connections not set
+  if(is.null(connections)&!is.table(country)){
+    country<-lapply(country,rename.country)
+    # connection matrix
+    if(!is.list(country)){net<-future.apply::future_lapply(list(country),get.net)
+      }else net<-future.apply::future_lapply(country,get.net)
+    net<-do.call(rbind,net)
+    connection<-paste(net[,1],net[,2],sep=" - ")
+    # frequency of country connections
+    tab<-table(connection)
+  }else{
+    if(!is.table(connections)){
+    connection<-unlist(lapply(connections,rename.country))
+    # frequency of country connections
+    tab<-table(connection)
+    }
+    if(is.table(connections)){
+      names(connections)<-rename.country(names(connections))
+      tab<-connections
+    }
+  }
+    tab<-tab[grep("[A-Z]",names(tab))]
+    tab<-tab[grep("^NA$",names(tab),invert=TRUE)]
+    # reduce to one country involvements
+    if(length(grep("[A-Z]",reduce2country))>0)  tab<-tab[grep(rename.country(reduce2country[1]),names(tab))]
+    # prepare objects
+    linewidth<-1.2
+  a<-grDevices::colorRampPalette(c("lightyellow","blue"))
+  steps<-max(ceiling(linewidth))
+  hexline<-a(steps+1)[-1]
+  # add 75% alpha channel (BF)/50% (80)
+  hexline<-paste(hexline,"80",sep="")
+  linecol<-hexline[round(linewidth)]
+  
+  if(length(tab)>0){
   # as matrix
   mat<-matrix(unlist(strsplit(names(tab)," - ")),ncol=2,byrow=T)
   mat<-cbind(mat,as.numeric(tab))
   linewidth<-round(((as.numeric(mat[,3])-min(as.numeric(mat[,3])))/max(as.numeric(mat[,3])))*8+1.5,2)/2
-  range(linewidth)
+  if(length(linewidth)==1) linewidth=1.2
   # color of lines
   a<-grDevices::colorRampPalette(c("lightyellow","blue"))
   steps<-max(ceiling(linewidth))
@@ -158,27 +210,60 @@ if(connections==TRUE&sum(unlist(lapply(country,length))>1)>0){
            type="l",col=mat[i,"linecol"],lwd=mat[i,"linewidth"])
   }
 
-# add legend
+  
+ # add legend
  if(legend==TRUE){
-    if(is.null(dim(mat[,3]))) text<-"no connections"
-    if(max(as.numeric(mat[,3]))==1) text<-"one connection"
-    if(max(as.numeric(mat[,3]))==2) text<-c("one connection","two connections")
-    if(max(as.numeric(mat[,3]))==3) text<-paste(1:3,"connect.")
-    legend(0,110+legend1adjust/2,grep("^1 cons",unique(c("1 con",paste(round(ceiling(max(as.numeric(mat[,3])))/2),"cons"),paste(max(as.numeric(mat[,3])),"cons"))),invert=TRUE,value=TRUE),
-       horiz=TRUE,xjust=.5,col=unique(hexline),bg=ocean,bty="n",title="n country connections",
+   # 0 connections 
+    if(is.null(dim(mat[,])[1])) text<-"no connections"
+    # 1 connection strength
+    if(length(unique(mat[,3]))==1){
+      text<-paste(max(as.numeric(mat[,3])),"connections")
+      text<-gsub("^(1 connection)s","\\1",text)
+    }
+    # 2 connection strengths
+    if(length(unique(mat[,3]))==2){
+      text<-paste(c(min(as.numeric(mat[,3])),max(as.numeric(mat[,3]))),"connections")
+      text<-gsub("^(1 connection)s","\\1",text)
+    }
+    # 3 or more connection strengths
+    if(length(unique(mat[,3]))>=3){
+      text<-paste(
+        format(c(1,ceiling(max(as.numeric(mat[,3]))/2),max(as.numeric(mat[,3]))),big.mark=";",trim=TRUE)
+        ,"connections")
+      text<-gsub("^(1 connection)s","\\1",text)
+    }
+
+    # add legend
+    legend(0,110+legend1adjust/2,text,
+       horiz=TRUE,xjust=.5,col=unique(hexline),bg=ocean,bty="n",
+       title="n country connections",
        lwd=unique(c(min(mat[,"linewidth"]),ceiling(max(as.numeric(mat[,"linewidth"]))/2),max(mat[,"linewidth"]))))
     text(0,120+legend1adjust*.8,main,font=2,cex=1.2)
+    temp<-TRUE
 #    text(0,120+legend1adjust,"n connections")
   } # end add legend
   }else{
-    # add title if no connections
-    text(0,115+legend1adjust*.8,main,font=2,cex=1.2)
-    if(connections==TRUE) legend(0,110+legend1adjust/2,"no country connections",horiz=TRUE,xjust=.5,bty="n")
+  if(temp==FALSE){
+       # add title if no connections
+       text(0,115+legend1adjust*.8,main,font=2,cex=1.2)
+       if(connect==TRUE) legend(0,110+legend1adjust/2,paste("no connections with",reduce2country),horiz=TRUE,xjust=.5,bty="n")
+       temp<-TRUE
+  }}
+    }else{
+      if(temp==FALSE){
+        # add title if no connections
+        text(0,115+legend1adjust*.8,main,font=2,cex=1.2)
+       if(connect==TRUE) legend(0,110+legend1adjust/2,"no country connections",horiz=TRUE,xjust=.5,bty="n")
+      }
   } # end add connections
+  
   # output frequency table of detected countries
-    if(connections==TRUE) return(list(countryFreq=sort(table(unlist(country))),connectionFreq=sort(tab)))
-    if(connections!=TRUE) return(list(countryFreq=sort(table(unlist(country)))))
-}
+  if(is.table(tab)&is.table(country)) return(list(countryFreq=sort(country),connectionFreq=sort(tab)))
+  if(connect==TRUE&!is.table(country)) return(list(countryFreq=sort(table(unlist(country))),connectionFreq=sort(tab)))
+  if(connect!=TRUE&!is.table(country)) return(list(countryFreq=sort(table(unlist(country)))))
+  if(connect!=TRUE&is.table(country)) return(list(countryFreq=sort(country)))
+  
+  }
 
 
 #####################################################

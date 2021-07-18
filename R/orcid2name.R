@@ -3,7 +3,7 @@
 #' function to convert ORCID to name with orcid.org api (needs valid ORCID token for OAuth authentication)
 #' @param x vector that contains ORCID and/or names
 #' @export
-#' @example 
+#' @examples 
 #' orcid2name(x<-c("0000-0001-8594-9511","0000-0003-1159-3991","0000-0003-1159-3991"))
 
 #library(rorcid)
