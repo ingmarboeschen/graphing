@@ -41,7 +41,7 @@ install_github("ingmarboeschen/graphing")
 <!-- Examples -->
 ## Examples
 
-### prettybarplot()
+### prettybarplot(), an adjustable labeled bar plot with background color option
 ```r
 x<-sample(letters[1:4],100,T)
 y<-sample(1:3,100,T)
@@ -53,7 +53,7 @@ prettybarplot(prop.table(table(x,y)))
 <img src="./preview/prettybarplot1d.png" height="400"><img src="./preview/prettybarplot2d.png" height="400">
 
 
-### profileline()
+### profileline(), course of descriptive parameters over several items
 ```r
 matrix<-data.frame(matrix(sample(-3:3,1000,T),ncol=10))
 names(matrix)<-paste("Item",1:10); g<-paste("Group",rep(1:3,length=100))
@@ -63,7 +63,7 @@ profileline(matrix,g,main="",N_legend=T,pch="",type="Mean",ex=T,low="low",high="
 ``` 
 <img src="./preview/profileline1.png" height="400"><img src="./preview/profileline2.png" height="400">
 
-### itemplot()
+### itemplot(), frequency distribution of categorical variable with descriptives
 ```r
 x<-factor(sample(letters[1:6],100,T))
 itemplot(x,main="itemplot()",labels=c("I fully\n disagree","I fully\n agree"),legend=F)
@@ -90,7 +90,7 @@ bp3d(x,z,y,main="bp3d()",xlab="treatment group")
 ``` 
 <img src="./preview/bp3d.png" height="400">
 
-### stacked.area.chart(), stacked area chart for 2 dimensional contingency tables
+### stacked.area.chart(), stacked area chart for two dimensional contingency tables
 ```r
 x<-sample(2010:2020,1000,T,.2+(1:11)*.5)
 y<-sample(paste("category",LETTERS[1:10]),1000,T)
@@ -101,7 +101,7 @@ stacked.area.chart(prop.table(table(x,y),m=1),main="stacked.area.chart()",ylab="
 ``` 
 <img src="./preview/stacked.area.chart1.png" height="400"><img src="./preview/stacked.area.chart2.png" height="400">
 
-### catplot(), draws conditioned or unconditioned frequency table of two multi categorial variables
+### catplot(), conditioned/unconditioned frequency plot for two high dimensional categorial variables
 ```r
 x<-sample(2010:2020,1000,T,.2+(1:11)*.5)
 y<-sample(paste("group",LETTERS[1:10]),1000,T)
@@ -109,7 +109,7 @@ catplot(x,y,main="catplot()",xlab="year")
 ``` 
 <img src="./preview/catplot.png" height="400">
 
-### multi.line(), draws multiple regression or lowess lines with a grouping variable
+### multi.line(), multi group comparison of regression/lowess lines
 ```r
 data(ChickWeight)
 attach(ChickWeight)
@@ -120,7 +120,7 @@ multi.line(x=jitter(Time,2),y=weight,group=Diet,points=F,main="multi.line() with
 ``` 
 <img src="./preview/multi.line1.png" height="400"><img src="./preview/multi.line2.png" height="400">
 
-### igraph2(), network graph from list input
+### igraph2(), simple network graph
 ```r
 x<-list(
      c("Laura","Ingmar"),
@@ -134,7 +134,7 @@ igraph2(x)
 ``` 
 <img src="./preview/igraph2.png" height="400">
 
-### worlmap2(), country and country connection frequency from list of countries
+### worlmap2(), world map of country and country connection frequency
 ```r
  x<-list(c("Germany","Austria","S. Korea"),
  c("Germany","Austria","S. Korea"),c("Germany","Austria","S. Korea"),
@@ -146,7 +146,7 @@ worldmap2(x)
 <img src="./preview/worldmap2.png" height="400">
 
 
-### orcid2name, convert ORCID author identification codes to 'surname, name'
+### orcid2name, ORCID author identification code to 'surname, name' conversion
 ```r
 # Note: You need an ORCID account to authenticate to the ORCID api
 name<-c("https://orcid.org/0000-0003-1159-3991")
