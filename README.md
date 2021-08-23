@@ -40,6 +40,7 @@ install_github("ingmarboeschen/graphing")
 ```
 <!-- Examples -->
 ## Examples
+The examples listed below are minimal working examples. For a full documentation of each function, check the manual.
 
 ### prettybarplot(), an adjustable labeled bar plot with background color option
 ```r
