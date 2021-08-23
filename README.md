@@ -90,7 +90,7 @@ bp3d(x,z,y,main="bp3d()",xlab="treatment group")
 ``` 
 <img src="./preview/bp3d.png" height="400">
 
-### bp3d(), stacked area chart for 2 dimensional contingency tables
+### stacked.area.chart(), stacked area chart for 2 dimensional contingency tables
 ```r
 x<-sample(2010:2020,1000,T,.2+(1:11)*.5)
 y<-sample(paste("category",LETTERS[1:10]),1000,T)
