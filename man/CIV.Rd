@@ -15,7 +15,7 @@ CIV(
   main = "",
   pch = 1 + as.numeric(factor(x)),
   col = "blue",
-  colpoints = "black",
+  colpoints = "grey",
   cex = 0.7,
   names = levels(factor(x)),
   jit = 0.2
