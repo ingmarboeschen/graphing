@@ -31,7 +31,7 @@ xlab=paste("|---| ",100*(1-alpha),"% - confidence intervall",sep=""), # x axis l
 main="", #title
 pch=1+as.numeric(factor(x)), # point character
 col="blue", # ci color
-colpoints="black", # point color
+colpoints="grey", # point color
 cex=.7, # point size
 names=levels(factor(x)), # names of groups on x axis
 jit=.2) # jitter intensity
@@ -46,7 +46,7 @@ x<-d[,1];y<-d[,2]
 # set x as factor
 x<-as.factor(x)
 # draw points
-boxplot(y~x,border=F,ylim=ylim,xlab=xlab,main=main,ylab=ylab,names=names)
+boxplot(y~x,border=F,ylim=ylim,xlab=xlab,main=main,ylab=ylab,names=names,col="white")
 points(y~jitter(as.numeric(x),jit),cex=cex,pch=pch,col=colpoints)
 # draw means
 points(1:length(levels(x)),tapply(y,x,mean,na.rm=T),col=col,pch=16)
