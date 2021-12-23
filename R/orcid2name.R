@@ -1,14 +1,25 @@
 #' orcid2name
 #' 
-#' function to convert ORCID to name with orcid.org api (needs valid ORCID token for OAuth authentication)
-#' @param x vector that contains ORCID and/or names
+#' function to convert ORCiD to name with orcid.org api (needs a valid ORCID token for OAuth authentication)
+#' @param x vector that contains a valid ORCID-address (e.g.: "https://orcid.org/0000-0003-1159-3991") and/or names
+#' @param useDB logical. IF TRUE a self curated list with ORCIDs from within the PMC database is beeing used before connecting to the API to gather still missing ORCIDs
 #' @export
 #' @examples 
-#' orcid2name(x<-c("0000-0001-8594-9511","0000-0003-1159-3991","0000-0003-1159-3991"))
+#' orcid2name(c("https://orcid.org/0000-0003-1159-3991","Einstein, Albert"))
 
 #library(rorcid)
-orcid2name<-function(x){
+orcid2name<-function(x,useDB=TRUE){
   x<-unlist(x)
+  # correct some errors in ORCID-address
+  x<-gsub("/$| |\\)$|;$","",x)
+  x<-gsub("//","/",x)
+  x<-gsub("00000","0000",x)
+  
+  if(useDB==TRUE){
+  x<-ORCID2nameDB(x) # function defintion on bottom of script
+  }
+  
+## if still has ID or useDB==FALSE, convert with ORCID API
   # get index
   index<-grep("[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}",x)
   if(length(index)>0){
@@ -25,4 +36,23 @@ orcid2name<-function(x){
       },error=function(e) x[index[i]])
     }}
   return(x)
+}
+
+
+ORCID2nameDB<-function(x){
+  output<-x
+  
+  # if has ORCID
+  if(length(grep("orcid\\.org",output))>0){
+    # ORCiDs in input that are present in data base
+    j<-which(is.element(gsub(".*rcid\\.org/","",output),ORCiD$ID))
+    if(length(j)>0){
+      # Index of these ORCIDS
+      for(k in j) output[k]<-ORCiD$Author[grep(gsub(".*rcid\\.org/","",output[k]),ORCiD$ID,fixed=TRUE)]
+      #        i<-grep(paste0(gsub(".*rcid\\.org/","",output[j]),collapse="|"),ORCiD$ID,fixed=F)
+      # replace ORCID with name
+      #        if(length(i)>0) output[j]<-ORCiD$Author[i]
+    }
+  }
+  return(output)
 }
