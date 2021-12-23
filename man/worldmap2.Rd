@@ -6,7 +6,9 @@
 \usage{
 worldmap2(
   country,
-  connections = TRUE,
+  connect = TRUE,
+  connections = NULL,
+  reduce2country = NULL,
   region = NULL,
   main = "country and country connection frequency",
   ocean = "grey95",
@@ -21,7 +23,13 @@ worldmap2(
 )
 }
 \arguments{
-\item{country}{a list with vectors of country names}
+\item{country}{a list with vectors or a frequency table of country names}
+
+\item{connect}{logical. If TRUE draws country connections}
+
+\item{connections}{an optional vector with connections seperated with " - " (e.g.: "Germany - USA")}
+
+\item{reduce2country}{character. reduces connections to those of one specific country}
 
 \item{region}{one of: ('eurasia' 'africa' 'latin america' 'north america' 'uk' 'oceania' 'asia')}
 
@@ -49,8 +57,6 @@ One of 'Blues', 'BuGn', 'BuPu', 'GnBu', 'Greens', 'Greys',
 \item{legend1adjust}{adjust y position of upper legend and title}
 
 \item{legend2adjust}{adjust y position of lower legend}
-
-\item{connection}{logical. If TRUE draws country connections}
 }
 \description{
 worldmap2
@@ -59,7 +65,7 @@ worldmap2
 worldmap2(country=list(c("Germany","Austria","S. Korea"),
 c("Germany","Domenican Rep.","S. Korea"),c("Germany","Austria","S. Korea"),
 c("Germany","Spain"),c("Germany","Spain"),c("United States","Germany"),
-c("Germany","Cuba","Bolivia","South Africa")),
-          connection=T,legend=T,xpd=F,
+c("Germany","Cuba","Bolivia","South Africa")),reduce2country="USA",
+          #connections=list("NA"," - ",c("Germany - USA","Germany - Peru"),"Germany - USA","Germany - Austria","Germany - USA","Germany - USA"),legend=T,xpd=F,
           legend1=-10,legend2=-15)
 }

@@ -4,11 +4,16 @@
 \alias{orcid2name}
 \title{orcid2name}
 \usage{
-orcid2name(x)
+orcid2name(x, useDB = TRUE)
 }
 \arguments{
-\item{x}{vector that contains ORCID and/or names}
+\item{x}{vector that contains a valid ORCID-address (e.g.: "https://orcid.org/0000-0003-1159-3991") and/or names}
+
+\item{useDB}{logical. IF TRUE a self curated list with ORCIDs from within the PMC database is beeing used before connecting to the API to gather still missing ORCIDs}
 }
 \description{
-function to convert ORCID to name with orcid.org api (needs valid ORCID token for OAuth authentication)
+function to convert ORCiD to name with orcid.org api (needs a valid ORCID token for OAuth authentication)
+}
+\examples{
+orcid2name(c("https://orcid.org/0000-0003-1159-3991","Einstein, Albert"))
 }

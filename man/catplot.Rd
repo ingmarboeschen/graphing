@@ -36,3 +36,8 @@ catplot(
 \description{
 Draws conditioned or unconditioned frequency table of two multi categorial variables
 }
+\examples{
+x<-sample(2010:2020,1000,T,.2+(1:11)*.5)
+y<-sample(paste("group",LETTERS[1:10]),1000,T)
+catplot(x,y,main="catplot()",xlab="year")
+}
