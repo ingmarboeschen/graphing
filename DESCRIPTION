@@ -3,7 +3,7 @@ Title: graphing
 Version: 0.0.1
 Authors@R: person("Ingmar", "Böschen", email = "ingmar.boeschen@sumdata.de", role = c("aut", "cre"))
 Description: Collection of descriptive graphing functions.
-Depends: R (>= 3.1.1)
+Depends: R (>= 3.5)
 Imports: 
     utils, stats, grDevices, tm, igraph, countrycode, rworldmap, geosphere, rgeos, RColorBrewer, rorcid, future.apply
 License: CC0
