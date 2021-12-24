@@ -11,9 +11,9 @@
 orcid2name<-function(x,useDB=TRUE){
   x<-unlist(x)
   # correct some errors in ORCID-address
-  x<-gsub("/$|\\)$|;$","",x)
+  x<-gsub("/$|;$","",x)
   x<-gsub("//","/",x)
-  x<-gsub("00000","0000",x)
+
   
   if(useDB==TRUE){
   x<-ORCID2nameDB(x) # function defintion on bottom of script
