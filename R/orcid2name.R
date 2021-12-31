@@ -1,14 +1,16 @@
 #' orcid2name
 #' 
-#' function to convert ORCiD to name with orcid.org api (needs a valid ORCID token for OAuth authentication)
-#' @param x vector that contains a valid ORCID-address (e.g.: "https://orcid.org/0000-0003-1159-3991") and/or names
-#' @param useDB logical. IF TRUE a self curated list with ORCIDs from within the PMC database is beeing used before connecting to the API to gather still missing ORCIDs
+#' Function to convert ORCiD to name with orcid.org api (needs a valid ORCID token for OAuth authentication)
+#' @param x vector that contains a valid ORCID-address (e.g.: "https://orcid.org/0000-0003-1159-3991") and/or names.
+#' @param useDB logical. IF TRUE a self curated list with ORCIDs from within the PMC database is beeing used before connecting to the API to gather still missing ORCIDs.
+#' @param useDB logical. IF TRUE a self curated list with ORCIDs from within the PMC database is beeing used before connecting to the API to gather still missing ORCIDs.
+#' @param api logical. IF TRUE the ORCID api is used to convert ORCiDs to names. Set to FALSE if no ORCiD authentification is possible. 
 #' @export
 #' @examples 
 #' orcid2name(c("https://orcid.org/0000-0003-1159-3991","Einstein, Albert"))
 
 #library(rorcid)
-orcid2name<-function(x,useDB=TRUE){
+orcid2name<-function(x,useDB=TRUE,api=TRUE){
   x<-unlist(x)
   # correct some errors in ORCID-address
   x<-gsub("/$|;$","",x)
@@ -20,6 +22,7 @@ orcid2name<-function(x,useDB=TRUE){
   }
   
 ## if still has ID or useDB==FALSE, convert with ORCID API
+  if(api==TRUE){
   # get index
   index<-grep("[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}",x)
   if(length(index)>0){
@@ -35,20 +38,22 @@ orcid2name<-function(x,useDB=TRUE){
         x[index[i]]<-out
       },error=function(e) x[index[i]])
     }}
+  }
   return(x)
 }
 
 
 ORCID2nameDB<-function(x){
   output<-x
-  
+  # which have ORCiD
+  hasORCiD<-grep("[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}",output)
   # if has ORCID
-  if(length(grep("orcid\\.org",output))>0){
+  if(length(hasORCiD)>0){
     # ORCiDs in input that are present in data base
-    j<-which(is.element(gsub(".*rcid\\.org/","",output),ORCiD$ID))
+    j<-which(is.element(gsub(".*rcid\\.org/","",output[hasORCiD]),graphing::ORCiD$ID))
     if(length(j)>0){
       # Index of these ORCIDS
-      for(k in j) output[k]<-ORCiD$Author[grep(gsub(".*rcid\\.org/","",output[k]),ORCiD$ID,fixed=TRUE)]
+      for(k in j) output[hasORCiD][k]<-graphing::ORCiD$Author[grep(gsub(".*rcid\\.org/","",output[hasORCiD][k]),graphing::ORCiD$ID,fixed=TRUE)]
       #        i<-grep(paste0(gsub(".*rcid\\.org/","",output[j]),collapse="|"),ORCiD$ID,fixed=F)
       # replace ORCID with name
       #        if(length(i)>0) output[j]<-ORCiD$Author[i]
