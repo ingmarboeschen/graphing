@@ -115,11 +115,11 @@ if(length(dim(x))<=1){
 if(length(dim(x))==2){
  # y axis label
  if(sum(x)>1&sum(c(rowSums(x)>dim(x)[1],colSums(x)>dim(x)[2]))>1){
-  if(ylab=="") ylab<-"absolute frequencies"}
+  if(is.null(ylab)) ylab<-"absolute frequencies"}
  if(sum(x)==1|sum(c(rowSums(x)==1,colSums(x)==1))==dim(x)[1]|sum(c(rowSums(x)==1,colSums(x)==1))==dim(x)[2]){
-   if(ylab=="") ylab<-"relative frequencies"}
+   if(is.null(ylab)) ylab<-"relative frequencies"}
  # draw empty barplot
- barplot(x,beside=T,main=main,ylab=ylab,xlab=xlab,ylim=c(0,max(x)+max(x)/7),col=col, 
+ barplot(x,beside=T,main=main,ylab=ylab,xlab=xlab,ylim=ylim,col=col, 
  cex.names = cex.names,cex.axis = cex.axis,axes = F,names=rep("",dim(x)[2]))
  if(axes==TRUE) axis(2,axTicks(2),labels=format(axTicks(2), big.mark=','),las=las)  
  # back ground
@@ -129,7 +129,7 @@ if(length(dim(x))==2){
  if(bg==T) abline(h=seq(ylim[2],0,length=1000),col=cols)
  abline(h=0,lwd=2)
  # add barplot
- barplot(x,beside=T,main="",ylab="",xlab="",ylim=c(0,max(x)+max(x)/7),col=col,add=T, border=border,
+ barplot(x,beside=T,main="",ylab="",xlab="",ylim=ylim,col=col,add=T, border=border,
  cex.names = cex.names,cex.axis = cex.axis,axes = FALSE, names=names)
 if(legend==T) legend("top",rownames(x),pch=15,col=col,horiz=T,bty="n")
  # text above bars
