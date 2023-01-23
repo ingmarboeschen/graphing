@@ -103,7 +103,7 @@ if(sum(pch==""|length(unique(pch))==1)>0) legtype<-"line"
 ifelse(legtype=="line",radj<-1.75,radj<-0)
 ifelse(main=="",top <- 3.5,top <- 6)
 ifelse(sum(low_label==""&high_label==""&xlab=="")>0,bottom <- 3,bottom <- 5)
-if(legend==TRUE) par(mar = c(bottom+bottom.adj, space_left, top, 6+max(nchar(as.character(group)))/4+radj)+.1)
+if(legend==TRUE) par(mar = c(bottom+bottom.adj, space_left, top, 6+max(nchar(as.character(group)),na.rm=TRUE)/4+radj)+.1)
 if(legend==FALSE|length(group)==1) par(mar = c(bottom+bottom.adj, space_left, top, 2)+.1)
 
 # draw empty plot
