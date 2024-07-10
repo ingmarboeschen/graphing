@@ -2,8 +2,8 @@
 #' @param x # a numeric or factor variable
 #' @param z # a numeric or factor variable
 #' @param interaction=TRUE Logical. if TRUE calculates and draws model with interaction  
-#' @param ylab=NULL y axis label
-#' @param xlab=NULL x axis label
+#' @param ylab=as.character(substitute(y)) y axis label
+#' @param xlab=as.character(substitute(x)) x axis label
 #' @param main=NULL main title
 #' @param col=NULL color
 #' @param xlim=NULL limits of x axis
