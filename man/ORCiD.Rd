@@ -5,7 +5,7 @@
 \alias{ORCiD}
 \title{ORCIDs and the corresponding author names}
 \format{
-A data frame with close to 1,000,000 rows and 2 variables:
+A data frame with 1,750,000 rows and 2 variables:
 \describe{
   \item{ID}{ORCID}
   \item{Author}{Author name}
@@ -19,6 +19,6 @@ A data frame with close to 1,000,000 rows and 2 variables:
 ORCiD
 }
 \description{
-A dataset containing close to 1,000,000 ORCIDs and corresponding names
+A dataset containing 1,750,000 ORCIDs and corresponding names
 }
 \keyword{datasets}
