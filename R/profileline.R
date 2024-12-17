@@ -11,7 +11,8 @@
 #' @param lty point character
 #' @param lwd  line width of profile line
 #' @param grid draw grid
-#' @param space_left space to y axis of first bar
+#' @param space_left white space on left side of graph
+#' @param space_right add white space on right side of graph
 #' @param xlab x axis label
 #' @param labels labels displayed on x axes (must be of length 
 #' @param extreme only draw poles of labels (senseful for likert items)
@@ -41,12 +42,13 @@ type="Median", # one out of "Median", "Mean", "1. Quartile", "3. Quartile"
 groupnames=levels(factor(group)),
 # general options
 main="", # title
-col=2:(length(unique(group))+1), # color of group lines
+col=2:(length(levels(factor(group)))+1), # color of group lines
 pch=1:length(levels(factor(group))), # point character
 lty=1:length(levels(factor(group))), # point character
 lwd = 2 , # line width of profile line
 grid=TRUE, #, draw grid
 space_left=max(nchar(names(matrix)))/3+2.5, # space for item names
+space_right=2,
 # axes options
 xlab="",  # x axis label
 labels="", # labels displayed on x axes (must be of length 
@@ -103,8 +105,9 @@ if(sum(pch==""|length(unique(pch))==1)>0) legtype<-"line"
 ifelse(legtype=="line",radj<-1.75,radj<-0)
 ifelse(main=="",top <- 3.5,top <- 6)
 ifelse(sum(low_label==""&high_label==""&xlab=="")>0,bottom <- 3,bottom <- 5)
-if(legend==TRUE) par(mar = c(bottom+bottom.adj, space_left, top, 6+max(nchar(as.character(group)),na.rm=TRUE)/4+radj)+.1)
-if(legend==FALSE|length(group)==1) par(mar = c(bottom+bottom.adj, space_left, top, 2)+.1)
+mar<-par()$mar
+if(legend==TRUE) par(mar = c(bottom+bottom.adj, space_left, top, space_right+6+max(nchar(as.character(group)),na.rm=TRUE)/4+radj)+.1)
+if(legend==FALSE|length(group)==1) par(mar = c(bottom+bottom.adj, space_left, top, space_right)+.1)
 
 # draw empty plot
 plot(0, type = "n", xlim = xlim, ylab = "", xlab=xlab,ylim = c(dim(matrix)[2],1)+c(0.01,-0.01), axes=F, main="")
@@ -117,7 +120,7 @@ if(axis.bottom==TRUE) axis(1, las=T, at = at, labels=labels,cex.axis=cex.axis.x)
 if(sum(low_label!=""|high_label!="")>0) axis(1, las=T, at = xlim, labels=c(low_label,high_label),cex.axis=cex.axis.x,tick=F,padj=padj)
 # draw grid
 if(grid==TRUE) grid(ny= NA,lwd = 2)
-
+if(grid==TRUE) abline(h=1:(dim(matrix)[2]),lty=3,col="lightgrey",lwd=2)
 # jitter points
 if(length(unique(group)) == 1) help<- 0 
 if(length(unique(group)) > 1)  help<- seq(-.105,.105,length=length(unique(group)))*length(unique(group))/2
@@ -127,7 +130,7 @@ result <- NULL
 resultM<-matrix(NA,ncol=length(unique(group)),nrow=dim(matrix)[2])
 for(j in 1:length(unique(group))){ 
 for(i in 1:dim(matrix)[2]) {
-temp<-as.numeric(matrix[,i])[group==unique(group)[j]]
+temp<-as.numeric(matrix[,i])[group==levels(factor(group))[j]]
 if (type == "Median") result[i] <- median(temp,na.rm=T)
 if (type == "1. Quartile") result[i] <- quantile(temp,.25,na.rm=T,type=4)
 if (type == "3. Quartile") result[i] <- quantile(temp,.75,,na.rm=T,type=4)
@@ -153,13 +156,19 @@ if(length(unique(group))>1){
  if(legend==TRUE&legtype=="line"){
   legend(at[length(at)]+.5+.5*(at[length(at)]-10)/10,.75-.05*(dim(matrix)[2]-8),groupnames, col=col, lty=lty, 
   cex=cex.legend,title=title,bty="n",title.adj=3,xpd=TRUE,xjust=0)
-# draw N observation per group
+# draw N observation and NA per group
  if(N_legend==TRUE){
-  legend(at[length(at)]+.5+.5*(at[length(at)]-10)/10,dim(matrix)[2]/2,paste("N =",table(group)), col=col, lty=lty , 
+  legend(at[length(at)]+.5+.5*(at[length(at)]-10)/10,dim(matrix)[2]/2,
+         paste("N =",table(group)),
+         col=col, lty=lty , 
   cex=cex.legend,title="Cases per group   ",bty="n",title.adj=3,xpd=TRUE,xjust=0)
  }
   }
  }
+
+
+# reset grphical parameters
+par(mar=mar)
 }
 
 
