@@ -67,8 +67,10 @@ N_legend=TRUE, # draw legend of N observations per group
 cex.legend=1, # character expansation of legend
 title=TRUE # legends title
 ){
+# get graphic devive settings
+  mar<-par()$mar
 
-
+  
 ifelse(lty=="",lty2 <- "",lty2 <- 0)
 # preperation
 if(is.factor(matrix[,1])) xlim <- c(1,length(levels(matrix[,1])))
@@ -105,12 +107,13 @@ if(sum(pch==""|length(unique(pch))==1)>0) legtype<-"line"
 ifelse(legtype=="line",radj<-1.75,radj<-0)
 ifelse(main=="",top <- 3.5,top <- 6)
 ifelse(sum(low_label==""&high_label==""&xlab=="")>0,bottom <- 3,bottom <- 5)
-mar<-par()$mar
+
 if(legend==TRUE) par(mar = c(bottom+bottom.adj, space_left, top, space_right+6+max(nchar(as.character(group)),na.rm=TRUE)/4+radj)+.1)
 if(legend==FALSE|length(group)==1) par(mar = c(bottom+bottom.adj, space_left, top, space_right)+.1)
 
 # draw empty plot
-plot(0, type = "n", xlim = xlim, ylab = "", xlab=xlab,ylim = c(dim(matrix)[2],1)+c(0.01,-0.01), axes=F, main="")
+plot(0, type = "n", xlim = xlim, ylab = "", xlab=xlab,
+     ylim = c(dim(matrix)[2],1)+c(0.01,-0.01), axes=F, main="")
 mtext(main,pad=-3.75,cex=1.5,font=2)
 # draw axes (y, x top, x bottom)
 axis(2, las=T, 1:dim(matrix)[2], names(matrix),cex.axis=cex.axis.y)
@@ -120,7 +123,7 @@ if(axis.bottom==TRUE) axis(1, las=T, at = at, labels=labels,cex.axis=cex.axis.x)
 if(sum(low_label!=""|high_label!="")>0) axis(1, las=T, at = xlim, labels=c(low_label,high_label),cex.axis=cex.axis.x,tick=F,padj=padj)
 # draw grid
 if(grid==TRUE) grid(ny= NA,lwd = 2)
-if(grid==TRUE) abline(h=1:(dim(matrix)[2]),lty=3,col="lightgrey",lwd=2)
+if(grid==TRUE) abline(h=1:(dim(matrix)[2]+1)+.5,lty=3,col="lightgrey",lwd=2)
 # jitter points
 if(length(unique(group)) == 1) help<- 0 
 if(length(unique(group)) > 1)  help<- seq(-.105,.105,length=length(unique(group)))*length(unique(group))/2
