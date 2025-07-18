@@ -1,12 +1,25 @@
 Package: graphing
 Title: graphing
 Version: 0.0.1
-Authors@R: person("Ingmar", "Böschen", email = "ingmar.boeschen@sumdata.de", role = c("aut", "cre"))
-Description: Collection of descriptive graphing functions.
-Depends: R (>= 3.5)
+Authors@R: person("Ingmar", "Böschen", email = "ingmar.boeschen@uni-hamburg.de.de", role = c("aut", "cre"))
+Description: Collection of descriptive graphing functions and a function for ORCiD to name conversion.
+Depends: R (>= 3.5.0)
 Imports: 
-    utils, stats, grDevices, tm, igraph, countrycode, rworldmap, geosphere, rgeos, RColorBrewer, rorcid, future.apply
+    utils,
+    stats,
+    grDevices,
+    tm,
+    igraph,
+    countrycode,
+    rworldmap,
+    geosphere,
+    sf,
+    RColorBrewer,
+    rorcid,
+    future.apply,
+    openNLP,
+    NLP
 License: CC0
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.2
