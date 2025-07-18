@@ -152,8 +152,22 @@ worldmap2<-function(country,
 if(connect==TRUE&!is.null(connections)){
   # prepare
   worldmap<-rworldmap::getMap(res="low")
-  centroids<-rgeos::gCentroid(worldmap,byid=T)
-  d<-as.data.frame(centroids)
+  # with sf package
+  world_sf <- sf::st_as_sf(worldmap)
+  world_sf_valid <- sf::st_make_valid(world_sf)
+  centroids_sf <- suppressWarnings(sf::st_point_on_surface(world_sf_valid))
+  centroids_coords <- sf::st_coordinates(centroids_sf)
+  attributes <- world_sf_valid[, c("NAME")]
+  coords <- sf::st_coordinates(centroids_sf)
+  d <- data.frame(lon = coords[, 1],  lat = coords[, 2])
+  land<-as.character(attributes$NAME)
+  land[is.na(land)]<-"NA"
+  rownames(d)<- rename.country(land)
+  
+  # with rgeos
+#  centroids<-rgeos::gCentroid(worldmap,byid=T)
+#    d<-as.data.frame(centroids)
+
   # get country connections if country is not a table and connections not set
   if(is.null(connections)&!is.table(country)){
     country<-lapply(country,rename.country)
