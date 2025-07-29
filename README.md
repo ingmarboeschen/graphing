@@ -14,7 +14,7 @@ The function **worldmap2()** depends on the R packages
 * [worldmap](https://cran.r-project.org/web/packages/rworldmap/rworldmap.pdf)
 * [countrycode](https://cran.r-project.org/web/packages/countrycode/countrycode.pdf)
 * [geosphere](https://cran.r-project.org/web/packages/geosphere/geosphere.pdf)
-* [rgeos](https://cran.r-project.org/web/packages/rgeos/rgeos.pdf)
+* [sf](https://cran.r-project.org/web/packages/sf/sf.pdf)
 * [RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/RColorBrewer.pdf)
 
 The function **orcid2name()** depends on the R package
