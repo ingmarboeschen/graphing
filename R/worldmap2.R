@@ -1,7 +1,7 @@
 #require(countrycode)
 #require(rworldmap)
 #require(geosphere)
-#require(rgeos)
+#require(sf)
 #library(RColorBrewer)
 
 #' worldmap2
